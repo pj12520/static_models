@@ -1,10 +1,10 @@
 function detail_sweep()
 %detail_sweep Same as param_sweep but a more detailed sweep over Delta
-%between ratio = 0.2 and 0.3
+%between ratio = 0.1 and 0.2
 
 %Number of different Bond numbers and Delta parameters over which to sweep
 n_Bond = 26;
-n_Delta = 4;
+n_Delta = 3;
 
 %Choose values of Bond numbers and Delta parameters
 for i = 1:10
@@ -16,7 +16,7 @@ for i = 11:26
 end
 
 for i = 1:4
-   ratio = 0.2 + i * 0.02;
+   ratio = 0.14 + i * 0.005;
    
    Delta(i) = (1.0 + ratio) * (1.0 + ratio); 
 end
