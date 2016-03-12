@@ -11,7 +11,7 @@ mdr=zeros(NPoints,1); %Maximum value of MDR for stable configuration at correspo
 % Do first step separately
 ang(1)=0.0;
 
-[sol,men_height] = OuterMeniscus(sqrt(Bond), ang(1));
+[sol,men_height(1)] = OuterMeniscus(sqrt(Bond), ang(1));
 
 mdr(1) = MDR(Bond, Delta, ang(1), men_height);
 % Now use crude continuation on subsequent steps to get the solutions for
@@ -21,7 +21,9 @@ for i=2:NPoints
 %    i 
     [sol,men_height] = OuterMeniscus(sqrt(Bond), ang(i), sol);
     
-    mdr(i) = MDR(Bond, Delta, ang(i), men_height);
+    men_height(i) = men_height / sqrt(Bond); %This converts from Dominic's dimensionless scheme to Paul's
+    
+    mdr(i) = MDR(Bond, Delta, ang(i), men_height(i));
 
 end
 %ans(NPoints)
@@ -30,12 +32,14 @@ estmax=0;
 for i=1:NPoints
     if (mdr(i)>estmax)
         estmax=mdr(i); %Find the maximum value of the MDR that gives a stable configuration for this Bond number and contact angle
+        equilib_pos = men_height(i) - cos(ang(i));
         equilib_imm = ang(i);
         
     end
 end
 
 max_mdr=estmax;
-
+equilib_imm
+equilib_pos
 end
 
