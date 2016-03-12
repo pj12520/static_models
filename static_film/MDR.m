@@ -8,10 +8,12 @@ function [mdr] = MDR(Bond, Delta, theta, men_height)
 %Delta quantity which accounts for presence of a thin fluid film between
 %the sphere and the interface.
 
-mdr = 3.0 * sqrt(Delta) / (4.0 * Bond) * (2.0 * sin(theta) * sin(theta) + Bond * Delta * (-men_height * sin(theta) * sin(theta) / sqrt(Bond * Delta) + 2.0 / 3.0 ...
-    + cos(theta) - cos(theta) * cos(theta) * cos(theta) / 3.0));
+%mdr = 3.0 * sqrt(Delta) / (4.0 * Bond) * (2.0 * sin(theta) * sin(theta) + Bond * Delta * (-men_height * sin(theta) * sin(theta) / sqrt(Bond * Delta) + 2.0 / 3.0 ...
+%    + cos(theta) - cos(theta) * cos(theta) * cos(theta) / 3.0));
 
 
+mdr = sqrt(Delta) * (3.0 * sin(theta) * sin(theta) / (2.0 * Bond) + Delta * (2.0 + 3.0 * cos(theta) - cos(theta) * cos(theta) * cos(theta)) / 4.0 ...
+    - 3.0 * men_height * sqrt(Delta) * sin(theta) * sin(theta) / 4.0);
 %mdr=3.0 / (4.0 * Bond) * (-2.0 * sin(imm) * sin(imm + contact) + Bond *(-height * sin(imm) * sin(imm) / sqrt(Bond) + 2.0 / 3.0 - cos(imm) + ...
  %       cos(imm) * cos(imm) * cos(imm) / 3.0));
 
